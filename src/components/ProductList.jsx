@@ -1,27 +1,29 @@
 import { useCart } from "../context/CartContest"
 
-const ProductList = () => {
+export default function ProductList() {
 
     const {dispatch} = useCart()
 
     const products = [
-        {name:"TV", amount: 80000, id:1},
-        {name:"Phone", amount: 30000, id:2},
-        {name:"car", amount: 8000000, id:3},        
+        {id:1, name:"pen", amount:5},
+        {id:2, name:"book", amount:30},
+        {id:3, name:"box", amount:100},
+        {id:4, name:"bag", amount:500},
+
     ]
   return (
     <div>
-        <h1>PRODUCT LIST</h1>
-        {products.map(product => (
-            <div className="border-black border w-50 rounded-[10px]" key={product.id}>
-                <div className="">{product.name}</div>
-                <span className="">PRICE{product.amount}</span>
-                <button className="inline bg-black text-white rounded-[5px] ml-6" onClick={() => dispatch({type:"ADD", items:product})}>ADD</button>
-            </div>
-        ))}
+        <h1>SHOPPING CART</h1>
+        {
+            products.map(product => (
+                <div className="" key={product.id}>
+                    <span className="">item: {product.name}</span>
+                    <div>amount: {product.amount}</div>
+                    <button onClick={() => dispatch({type: "ADD", payload: product})}>ADD TO CART</button>
+                </div>
+            ))
+        }
       
     </div>
   )
 }
-
-export default ProductList

@@ -1,26 +1,30 @@
 import { useCart } from "../context/CartContest"
 
-const Cart = () => {
+export default function Cart() {
 
-    const {state, dispatch} = useCart()
-    const total = state.cart.reduce((sum, item) => sum + item.amount, 0)
+  const {state,dispatch} = useCart()
+  const {cart} = state
 
+  const total = cart.reduce((sum, item) => sum+(item.amount * item.qty),0)
   return (
-    <div>
-        <h1>Cart</h1>
-        {state.cart.length === 0 && <p> cart is empty </p>}
+    <div className="ml-70">
+      <h1>CART</h1>
+      {console.log(cart)}
 
-        {state.cart.map(item => (
-            <div className="" key={item.id}>
-                <div className="inline">{item.name}</div>
-                <button className="inline bg-black text-white rounded-[5px] ml-2.5" onClick={() => dispatch({type: "REMOVE", items:item.id})}>REMOVE</button>
-            </div>
-        ))}
+      {cart.map(item => (
+        <div className="" key={item.id}>
+          <span>.{item.name}</span> - <span>{item.amount}</span> 
+          <button onClick={() => dispatch({type:"REMOVE", payload: item.id})}>REMOVE</button>
+          <div>Count:{item.qty}</div> <button onClick={() => dispatch({type:"COUNT+", payload: item.id})}>+</button> <button onClick={() => dispatch({type:"COUNT-", payload: item.id})} >-</button>
+          <div className="">amount:{item.amount * item.qty}</div>
+        </div>
+      ))}
 
-        <div className="mt-5 font-medium">TOTAL: {total}</div>
+                                                
+      <div className="font-medium">TOTAL AMOUNT:{total}</div>
+
+      
       
     </div>
   )
 }
-
-export default Cart

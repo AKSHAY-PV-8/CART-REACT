@@ -6,13 +6,14 @@ function App() {
 
   return (
     <>
-    <div >
+    <div className="flex flex-row">
       <ProductList/>
       <Cart/>
     </div>
-      
+                              
     </>
   )
 }
 
 export default App
+  
