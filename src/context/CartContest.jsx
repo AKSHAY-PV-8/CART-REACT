@@ -6,7 +6,7 @@ const CartContext = createContext();
 const initailValue = {
     cart: []
 }
-
+ 
 function reducer (state, action){
     switch(action.type){
         case "ADD":
